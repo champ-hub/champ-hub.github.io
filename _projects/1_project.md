@@ -20,18 +20,6 @@ Below you can also find the documentation of the CARM Tool to better understand 
 
 # The CARM Tool Documentation
 
-<p>
-  <a href="https://doi.org/10.1109/L-CA.2013.6" alt="Publication">
-    <img src="https://img.shields.io/badge/DOI-10.1109/L--CA.2013.6-blue.svg"/></a>
-    
-</p>
-
-<p>
-  <a href="https://doi.org/10.1016/j.future.2020.01.044" alt="Publication">
-    <img src="https://img.shields.io/badge/DOI-10.1016/j.future.2020.01.044-blue.svg"/></a>
-    
-</p>
-
 This tool performs the micro-benchmarking necessary to constuct the Cache-Aware Roofline Model (CARM) for floating-point operations on Intel, AMD, AARCH64, and RISCV64 CPUs. It supports different instruction set extensions (AVX512, AVX, SSE, Scalar, Neon, RVV0.7), different data precisions (double- and single-precision), different floating point instructions (fused multiply and add, addition, multiplication and division). The micro-benchmarks can be performed for any number of threads. The tool provides as output a vizualization of CARM, as well as the measurements obtained for the different memory levels and selected FP instruction. The tool is also capable of the micro-benchmarking necessary to construct a memory bandwidth graph for various problem sizes, and perform mixed tests that stress the FP units and memory system at the same time.
 
 The tool can also perform application analysis using either performance counters (via PAPI) or dynamic binary instrumentation (via DynamoRIO or Intel SDE), to view the output of these results in a CARM graph the GUI is required.
@@ -199,6 +187,21 @@ Note that for Region of Interest analysis, the source code must be previously in
 
 ## In papers and reports, please refer to this tool as follows
 
+J. Morgado, L. Sousa, A. Ilic. "CARM Tool: Cache-Aware Roofline Model Automatic Benchmarking and Application Analysis", IEEE International Symposium on Workload Characterization (IISWC), Vancouver, British Columbia, Canada, 2024
+
 A. Ilic, F. Pratas and L. Sousa, "Cache-aware Roofline model: Upgrading the loft," in IEEE Computer Architecture Letters, vol. 13, no. 1, pp. 21-24, 21 Jan.-June 2014, doi: 10.1109/L-CA.2013.6.
 
 Diogo Marques, Aleksandar Ilic, Zakhar A. Matveev, and Leonel Sousa. "Application-driven cache-aware roofline model." Future Generation Computer Systems 107 (2020): 257-273.
+
+
+<p>
+  <a href="https://doi.org/10.1109/L-CA.2013.6" alt="Publication">
+    <img src="https://img.shields.io/badge/DOI-10.1109/L--CA.2013.6-blue.svg"/></a>
+    
+</p>
+
+<p>
+  <a href="https://doi.org/10.1016/j.future.2020.01.044" alt="Publication">
+    <img src="https://img.shields.io/badge/DOI-10.1016/j.future.2020.01.044-blue.svg"/></a>
+    
+</p>
