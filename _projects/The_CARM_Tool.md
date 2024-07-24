@@ -8,13 +8,13 @@ category: HPC Application Analysis
 related_publications: true
 ---
 
-The Cache-aware Roofline Model (CARM) [1], developed at the CHAMP Hub at INESC-ID, is an insightful computer architecture performance model. It offers a high-level picture on the fundamental memory and compute performance limitations, while also providing intuitive analysis of the application execution bottlenecks and effectively guiding optimization efforts. The CARM Tool [2] provides a one-stop shop for CARM related analysis across a variety of different architectures, supporting nearly all major CPU vendors and ISAs. It comprises a set of independent and complementary modules that provide a complete CARM-based profiling ecosystem, ranging from automatic system benchmarking to application analysis and result visualization.
+The Cache-aware Roofline Model (CARM), developed at the CHAMP Hub at INESC-ID, is an insightful computer architecture performance model. It offers a high-level picture on the fundamental memory and compute performance limitations, while also providing intuitive analysis of the application execution bottlenecks and effectively guiding optimization efforts. The CARM Tool provides a one-stop shop for CARM related analysis across a variety of different architectures, supporting nearly all major CPU vendors and ISAs. It comprises a set of independent and complementary modules that provide a complete CARM-based profiling ecosystem, ranging from automatic system benchmarking to application analysis and result visualization.
 
 The CARM Tool provides both a command line mode and a graphical user interface (GUI) to fully engage with the cross-platform architecture and application profiling facilities when executing user-specified tasks. Two different engines for in-depth CARM-based application analysis are provided based on: performance counters and/or dynamic binary instrumentation. With those, the performance and arithmetic intensity of analyzed applications and their hotspots (accessible via the custom built-in ROI code annotations) are automatically calculated and visualized in the tool-generated CARM plot of the architecture where the code is run. The CARM Tool also automatically saves the collected results from different platforms and application runs, which become available to be presented within the GUI or exported as SVG graphs.
 
 The CARM Tool is equipped with a robust assembly-level automatically generating micro-benchmarking module necessary to construct the CARM on all supported processors (e.g.: Intel/AMD x86-64, ARM AARCH64, and RISCV64), for any number of threads and a large set of different instruction set extensions (such as SIMD AVX512, Neon, RVV), data precisions, and instruction types. The Tool allows for a highly accurate and user customizable micro-benchmarking of complete memory subsystems and compute units, for various problem sizes, load/store and compute-to-memory operation ratios. It fully assesses the upper-bound capabilities of FP units and memory hierarchy levels (caches and DRAM).
 
-The CARM Tool is open-source, more information about it can be found at https://github.com/champ-hub/carm-roofline.
+The CARM Tool is open-source, and it can be downloaded from https://github.com/champ-hub/carm-roofline.
 
 Below you can also find the documentation of the CARM Tool to better understand all of its functionality.
 
@@ -44,7 +44,7 @@ For better results visualization, ResultsGUI.py can be ran to generate a web bro
 
 ## How to use (CLI)
 
-The first step is to create an optional configuration file for the system to test under the **config** folder. This configuration file is optional in x86 systems since the tool is able to automatically scan the cache sizes present, however this detection can sometimes be wrong (you can check what cache sizes have been detected by using -v 3), so a configuration file is still advised. You can also skip the configuration file by using the arguments: 
+The first step is optional and consists in creating a configuration file for the system to test under the **config** folder. This configuration file is optional in x86 systems since the tool is able to automatically scan the cache sizes present, however this detection can sometimes be wrong (you can check what cache sizes have been detected by using -v 3), so a configuration file is still advised. You can also skip the configuration file by using the arguments: 
 -l1 <l1_size (per core)> -l2 <l2_size (per core)> -l3 <l3_size (total)> and --name <name>.
 
 This configuration file can include four fields:
@@ -73,7 +73,7 @@ where
  - --test <test> is the test to be performed (roofline, MEM, FP, L1, L2, L3, DRAM, mixedL1, mixedL2, mixedL3, mixedDRAM);
  - --inst <fp_inst> is the floating point instruction to be used (add, mul, div), fma performance is also measured by default;
  - --num_ops <num_ops> is the number of FP operations used for the FP benchmark;
- - --isa <isa> is the instruction set extension, multiple options can be seletcted by spacing them (avx512, avx2, sse, scalar, neon, armscalar, riscvvector, riscvscalar, auto);
+ - --isa <isa> is the instruction set extension, multiple options can be seletcted by spacing them (avx512, avx2, sse, scalar, neon, armscalar, rvv0.7, rvv1.0, riscvscalar, auto);
  - --precision <data_precision> is the precision of the data, multiple options can be seletcted by spacing them (dp, sp);
  - --ld_st_ratio <ld_st_ratio> is the number of loads per store involed in the memory benchmarks;
  - --fp_ld_st_ratio <fp_ld_st_ratio> is the FP to Load/Store ratio involved in the mixed benchmarks;
@@ -102,7 +102,7 @@ A simple run can be executed with the command
 python run.py
 ```
 
-which by default runs the micro-benchmarks necessary to obtain CARM data, for all available ISAs using double-precision. The FP instruction used is the ADD and FMA (32768 operations) and the memory benchmarks contain 2 loads per each store, with the DRAM test using an array with size 512MiB and 1 thread.
+which by default runs the micro-benchmarks necessary to obtain CARM data, for all available ISAs using double-precision. The FP instructions used are the ADD and FMA (32768 operations) and the memory benchmarks contain 2 loads per each store, with the DRAM test using an array with size 512MiB and 1 thread.
 
 For additional information regarding the input arguments, run the command:
 
@@ -134,7 +134,19 @@ To profile an application using **Dynamic Binary Instrumentation**, DBI_AI_Calcu
  - --precision <data_precision> Data Precision used by the application (optional only for naming facilitation);
  - <additional_args> Arguments for the executable that will be analyzed. (This should be your last argument)
 
-Note that both the PMU analysis and the DBI with ROI analysis require the previous injection of the source code with Region of Interest specific code, to facilitate this proccess you can include the dbi_carm_roi.h header file in your application directory and use the carm_roi_start() and carm_roi_end() API functions to enable the DBI based ROI analysis. For PMU analysis via PAPI, the PAPI high level API must be used to define the region of interest via the papi_hl_region_start() and papi_hl_region_end() functions.
+Note that both the PMU analysis and the DBI with ROI analysis require the previous injection of the source code with Region of Interest specific code, to facilitate this proccess you can include the dbi_carm_roi.h header file in your application directory and use the API functions to enable the DBI based ROI analysis.
+
+```
+CARM_roi_begin();
+CARM_roi_end();
+```
+
+For PMU analysis via PAPI, the PAPI high level API must be used to define the region of interest via the  functions.
+
+```
+PAPI_hl_region_begin("");
+PAPI_hl_region_end("");
+```
 
 In case of PMU analysis the PAPI library must be linked during compilation, this can usually be done following one of these methods:
 
