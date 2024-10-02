@@ -14,7 +14,7 @@ The CARM Tool provides both a command line mode and a graphical user interface (
 
 The CARM Tool is equipped with a robust assembly-level automatically generating micro-benchmarking module necessary to construct the CARM on all supported processors (e.g.: Intel/AMD x86-64, ARM AARCH64, and RISCV64), for any number of threads and a large set of different instruction set extensions (such as SIMD AVX512, Neon, RVV), data precisions, and instruction types. The Tool allows for a highly accurate and user customizable micro-benchmarking of complete memory subsystems and compute units, for various problem sizes, load/store and compute-to-memory operation ratios. It fully assesses the upper-bound capabilities of FP units and memory hierarchy levels (caches and DRAM).
 
-The CARM Tool is open-source, and it can be downloaded from https://github.com/champ-hub/carm-roofline.
+The CARM Tool is open-source, and it can be downloaded from [Github](https://github.com/champ-hub/carm-roofline).
 
 Below you can also find the documentation of the CARM Tool to better understand all of its functionality.
 
