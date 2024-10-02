@@ -5,7 +5,7 @@ permalink: /projects/
 description: Current projects being developed by CHAMP Hub.
 nav: true
 nav_order: 3
-display_categories: [HPC Application Analysis]
+display_categories: [Research Projects, Open-Source Github Projects]
 horizontal: false
 ---
 
