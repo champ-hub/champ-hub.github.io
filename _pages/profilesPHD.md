@@ -1,8 +1,8 @@
 ---
 layout: profiles
-permalink: /people/
-title: People
-description: Teaching Members of the CHAMP hub team.
+permalink: /peoplephd/
+title: PeoplePHD
+description: PHD Members of the CHAMP hub team.
 nav: true
 nav_order: 7
 
@@ -25,10 +25,10 @@ profiles:
     #  <p>555 your office number</p>
     #  <p>123 your address street</p>
     #  <p>Your City, State 12345</p>
-  #- align: right
-    #image: jose_morgado.png
-    #content: about_jose_morgado.md
-    #image_circular: false # crops the image to make it circular
+  - align: right
+    image: jose_morgado.png
+    content: about_jose_morgado.md
+    image_circular: false # crops the image to make it circular
     #more_info: >
     #  <p>555 your office number</p>
     #  <p>123 your address street</p>
