@@ -3,7 +3,7 @@ layout: profiles
 permalink: /people/
 title: People
 description: Teaching Members of the CHAMP hub team.
-nav: true
+nav: false
 nav_order: 7
 
 profiles:

@@ -3,7 +3,7 @@ layout: profiles
 permalink: /peoplemsc/
 title: PeopleMSc
 description: MSc Members of the CHAMP hub team.
-nav: true
+nav: false
 nav_order: 7
 
 profiles:
